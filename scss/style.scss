@@ -1,0 +1,104 @@
+@keyframes fadeIn { to { opacity: 1 }}
+@keyframes rotate { to { transform: rotate(1turn) }}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: hsl(33, 51%, 83%);
+  font: {
+    family: sans-serif;
+    weight: bold;
+  }
+  color: #222;
+}
+
+.split {
+  transform: scale(0);
+}
+
+.loading.fade-out {
+  opacity: 0;
+}
+
+.loading {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #000;
+  z-index: 99999999999999;
+  opacity: 1;
+  transition: opacity 200ms;
+  &::before,
+  &::after {
+    position: absolute;
+    display: block;
+    content: "";
+    border-radius: 50%;
+  }
+  &::before {
+    /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#959595+0,0d0d0d+46,010101+50,0a0a0a+53,4e4e4e+76,383838+87,1b1b1b+100;Black+Gloss+Pipe */
+    background: rgb(149,149,149); /* Old browsers */
+    background: -moz-linear-gradient(top,  rgba(149,149,149,1) 0%, rgba(13,13,13,1) 46%, rgba(1,1,1,1) 50%, rgba(10,10,10,1) 53%, rgba(78,78,78,1) 76%, rgba(56,56,56,1) 87%, rgba(27,27,27,1) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top,  rgba(149,149,149,1) 0%,rgba(13,13,13,1) 46%,rgba(1,1,1,1) 50%,rgba(10,10,10,1) 53%,rgba(78,78,78,1) 76%,rgba(56,56,56,1) 87%,rgba(27,27,27,1) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom,  rgba(149,149,149,1) 0%,rgba(13,13,13,1) 46%,rgba(1,1,1,1) 50%,rgba(10,10,10,1) 53%,rgba(78,78,78,1) 76%,rgba(56,56,56,1) 87%,rgba(27,27,27,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#959595', endColorstr='#1b1b1b',GradientType=0 ); /* IE6-9 */
+    width: 70px;
+    height: 70px;
+    animation: rotate 1s ease infinite;
+  }
+  &::after {
+    background: transp;
+    width: 50px;
+    height: 50px;
+    background: #000;
+  }
+}
+
+.container {
+  display: none;
+  margin: auto;
+  width: 95vw;
+  opacity: 0;
+  animation: fadeIn 700ms 1s linear forwards;
+  .book {
+    transition: all 500ms;
+    display: grid;
+    margin: 10px;
+    grid-template-columns: 1fr 2fr;
+    &:not(:last-of-type) {
+      margin-bottom: 30px;
+    }
+    h3 {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-transform: uppercase;
+      text-shadow: 1px 1px 0 white;
+    }
+    .chapters {
+      background: orangered;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      margin: 0 auto;
+      counter-reset: chapter;
+      input {
+        cursor: pointer;
+        margin: 10px 20px;
+        transform: scale(1.5);
+        &::before {
+          counter-increment: chapter;
+          content: counter(chapter);
+          color: teal;
+          transform: scale(0.8);
+          display: flex;
+          justify-content: center;
+        }
+      }
+    }
+  }
+}
